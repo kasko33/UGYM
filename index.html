@@ -443,7 +443,7 @@ c-29 -95 -50 -129 -135 -215 -56 -57 -69 -68 -97 -76 -11 -4 -37 -18 -57 -32
                     document.getElementById('formContainer').style.display = 'none';
                     document.getElementById('successMsg').classList.add('show');
                 } else {
-                    alert('❌ حدث خطأ: ' + (result.error || 'حاول مرة أخرى'));
+                    alert('❌ خطأ: ' + (result.error || 'حاول مرة أخرى'));
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'تسجيل';
                 }
