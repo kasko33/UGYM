@@ -397,7 +397,7 @@ c-29 -95 -50 -129 -135 -215 -56 -57 -69 -68 -97 -76 -11 -4 -37 -18 -57 -32
             }
         });
 
-        // ===== إرسال البيانات =====
+        // ===== إرسال البيانات مباشرة إلى تليجرام =====
         document.getElementById('registerForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('submitBtn');
@@ -428,22 +428,40 @@ c-29 -95 -50 -129 -135 -215 -56 -57 -69 -68 -97 -76 -11 -4 -37 -18 -57 -32
                 return;
             }
 
-            // ⚠️ استبدل هذا الرابط بالرابط الجديد بعد إعادة النشر
-            const scriptURL = 'https://script.google.com/macros/s/الرابط_الجديد_هنا/exec';
+            // =============================================
+            // 🔑 التوكن و ID مباشرة في الكود
+            // ⚠️ تحذير: هذه الطريقة غير آمنة! أي شخص يمكنه رؤية التوكن
+            // =============================================
+            const botToken = '8759929334:AAEN_bXd_l5Mhkz7F7jV20mXCdyGB5ZGNbU';
+            const chatId = '6515799104';
+
+            const message = `📋 طلب تسجيل صاحب جيم جديد\n\n` +
+                            `🏋️ اسم الجيم: ${gymName}\n` +
+                            `📱 رقم الهاتف: ${phone}\n` +
+                            `📧 البريد الإلكتروني: ${email}\n` +
+                            `🔑 كلمة المرور: ${password}\n\n` +
+                            `🕐 تاريخ التسجيل: ${new Date().toLocaleString('ar-IQ')}`;
+
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
             try {
-                const response = await fetch(scriptURL, {
+                const response = await fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ gymName, phone, email, password })
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
                 });
+
                 const result = await response.json();
 
-                if (result.success) {
+                if (result.ok) {
                     document.getElementById('formContainer').style.display = 'none';
                     document.getElementById('successMsg').classList.add('show');
                 } else {
-                    alert('❌ خطأ: ' + (result.error || 'حاول مرة أخرى'));
+                    alert('❌ خطأ: ' + (result.description || 'حاول مرة أخرى'));
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'تسجيل';
                 }
