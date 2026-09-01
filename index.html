@@ -371,7 +371,7 @@ c-29 -95 -50 -129 -135 -215 -56 -57 -69 -68 -97 -76 -11 -4 -37 -18 -57 -32
             document.getElementById("minutes").innerHTML = Math.floor((distance % (1000*60*60)) / (1000*60)) < 10 ? "0" + Math.floor((distance % (1000*60*60)) / (1000*60)) : Math.floor((distance % (1000*60*60)) / (1000*60));
             document.getElementById("seconds").innerHTML = Math.floor((distance % (1000*60)) / 1000) < 10 ? "0" + Math.floor((distance % (1000*60)) / 1000) : Math.floor((distance % (1000*60)) / 1000);
             if (distance < 0) {
-                document.getElementById("countdown").innerHTML = "<h2 style='color:#50e3c2;'>🎉 تم الافتتاح! 🎉</h2>";
+                document.getElementById("countdown").innerHTML = "<h2 style='color:#50e3c2;'> الافتتاح قريبا سجل مسبقا </h2>";
             }
         }, 1000);
 
